@@ -1,0 +1,13 @@
+How to run:
+
+--
+
+make
+./simulator program.bin > run.log
+
+--
+
+program.bin is the output of the compiler, which is invoked as such:
+g++ compiler.cpp -o compile
+./compile my_ai.code
+ls program.bin # will exist now

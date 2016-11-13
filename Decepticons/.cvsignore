@@ -1,0 +1,7 @@
+*.o
+*.d
+*.exe
+*.suo
+*.user
+*.sdf
+*.opensdf

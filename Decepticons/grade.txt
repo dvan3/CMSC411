@@ -1,0 +1,47 @@
+Team Decepticons
+  25 /25 : ISA
+     5 / 5 : Well defined instruction set
+     5 / 5 : Clear choice of architecture type
+     5 / 5 : Control flow instructions
+     5 / 5 : Robot control instructions
+     5 / 5 : Encoding
+             Nice simple encoding, given the constraints of the robot
+  25 /25 : Organization
+     5 / 5 : Obey design constraints
+     5 / 5 : No structural hazards
+     5 / 5 : Avoid or manage other hazards
+             Fine to stall for control hazard
+     5 / 5 : Implements ISA
+     5 / 5 : Realizable
+  25 /25 : Simulation
+           I have stared into the template madness, and suggest closed
+           form rather than a recursive templates for better
+           compilation speed [1]. Also, the hton variants should
+           ALWAYS do the right thing, and most compilers will optimize
+           them away in the case when they're not necessary, so the
+           #ifdef LITTLE_ENDIAN should not be necessary.
+     5 / 5 : Read binary program file
+     5 / 5 : Execute one cycle per step
+     5 / 5 : Decode binary instruction
+     5 / 5 : Correctly simulate execution
+     5 / 5 : Handling of robot commands
+  25 /25 : Game
+     5 /10 : Reasonable assembly code
+     5 / 5 : Encoding into binary
+     5 / 5 : Targeted firing at other robots
+     5 / 5 : Don't stop until killed
+   4 / 12 : Tournament bonus 
+            Bumped to 3rd place bonus after Autobot disqualification
+==========
+ 104 /100 Total
+
+[1] Alternate BITMASK implementation
+    Uses ~T(0) to get all 1s for the size of T
+    Shifts to get low leading 1s and low+span leading 1s
+    Then uses xor to turn that into low 0s, span 1s, then 0s
+    e.g. 11000 ^ 11110 = 00110
+
+#define BITMASK(T,low,span) \
+  ((~T(0)<<(8*sizeof(T)-(low))) ^ (~T(0)<<(8*sizeof(T)-(low)-(span))))
+
+Should still resolve to a constant at compile time
